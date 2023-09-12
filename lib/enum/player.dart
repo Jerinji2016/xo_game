@@ -1,0 +1,1 @@
+enum Player { first, second }
