@@ -28,6 +28,7 @@ class XOGame extends StatelessWidget {
         create: (context) => GameProvider(),
         child: const App(),
       ),
+      themeMode: ThemeMode.dark,
       theme: ThemeData(
         fontFamily: 'LuckiestGuy',
         appBarTheme: const AppBarTheme(
