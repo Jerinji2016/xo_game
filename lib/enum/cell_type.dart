@@ -1,9 +1,9 @@
-enum CellType {
-  empty(""),
-  x("X"),
-  o("O");
+enum Cell {
+  empty(''),
+  x('X'),
+  o('O');
+
+  const Cell(this.value);
 
   final String value;
-
-  const CellType(this.value);
 }
