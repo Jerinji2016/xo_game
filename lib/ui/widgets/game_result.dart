@@ -5,7 +5,14 @@ import '../../game_provider/game_provider.dart';
 import 'primary_button.dart';
 
 class GameResult extends StatelessWidget {
-  const GameResult({super.key});
+  const GameResult({
+    required this.onPlayAgainTapped,
+    required this.onGoToMenuTapped,
+    super.key,
+  });
+
+  final VoidCallback onPlayAgainTapped;
+  final VoidCallback onGoToMenuTapped;
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +34,12 @@ class GameResult extends StatelessWidget {
         const SizedBox(height: 24),
         PrimaryButton(
           text: 'Play Again',
-          onTap: Provider.of<GameProvider>(context).onPlayTapped,
+          onTap: () {},
         ),
         const SizedBox(height: 24),
         PrimaryButton(
           text: 'Go To Menu',
-          onTap: Provider.of<GameProvider>(context).returnToMenu,
+          onTap: () {},
         ),
       ],
     );
