@@ -1,12 +1,30 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 
+import '../config/shared_pref_config.dart';
 import '../enum/player.dart';
+import '../modals/game_cache.dart';
 import '../modals/game_result.dart';
 import '../ui/pages/result_page.dart';
 
 part 'constants.dart';
 
+const kGameCacheKey = 'game-cache';
+
 class GameProvider extends ChangeNotifier {
+  GameProvider() {
+    final cache = sharedPreferences.get(kGameCacheKey);
+    if (cache == null) return;
+
+    final json = Map<String, int?>.from(jsonDecode(cache as String) as Map);
+    _gameCache = GameCache.fromJson(json);
+  }
+
+  GameCache _gameCache = GameCache();
+
+  GameCache get cache => _gameCache;
+
   late final _cellValues = Map<int, Player?>.from(kDefaultCell);
 
   int _playerIndex = 0;
@@ -26,10 +44,21 @@ class GameProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void _saveWinnerResult(Player player) {
+    _gameCache = GameCache(
+      xWins: player == Player.x ? _gameCache.xWins + 1 : _gameCache.xWins,
+      oWins: player == Player.o ? _gameCache.oWins + 1 : _gameCache.oWins,
+    );
+    sharedPreferences.setString(kGameCacheKey, jsonEncode(_gameCache.toJson()));
+  }
+
   void onCellTapped(BuildContext context, int index) {
     _cellValues[index] = Player.values.elementAt(_playerIndex);
     final canContinue = _evaluate();
     if (!canContinue) {
+      final player = Player.values[_playerIndex];
+      _saveWinnerResult(player);
+
       Navigator.of(context).push(
         CupertinoPageRoute<void>(
           builder: (context) => const ResultPage(),

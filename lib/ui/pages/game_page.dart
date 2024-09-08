@@ -30,9 +30,11 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin, Fade
   @override
   void initState() {
     super.initState();
-    Provider.of<GameProvider>(context, listen: false).reset();
     SchedulerBinding.instance.addPostFrameCallback(
-      (timestamp) => _entryController.forward(),
+      (timestamp) {
+        Provider.of<GameProvider>(context, listen: false).reset();
+        _entryController.forward();
+      },
     );
   }
 

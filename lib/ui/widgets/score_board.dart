@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../game_provider/game_provider.dart';
 
 class ScoreBoard extends StatefulWidget {
   const ScoreBoard({super.key});
@@ -10,6 +13,8 @@ class ScoreBoard extends StatefulWidget {
 class _ScoreBoardState extends State<ScoreBoard> {
   @override
   Widget build(BuildContext context) {
+    final gameProvider = Provider.of<GameProvider>(context);
+
     return Material(
       color: Colors.transparent,
       child: Hero(
@@ -27,8 +32,14 @@ class _ScoreBoardState extends State<ScoreBoard> {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _buildPlayerScore('Player X:', '10'),
-                  _buildPlayerScore('Player O:', '6'),
+                  _buildPlayerScore(
+                    'Player X:',
+                    gameProvider.cache.xWins.toString(),
+                  ),
+                  _buildPlayerScore(
+                    'Player O:',
+                    gameProvider.cache.oWins.toString(),
+                  ),
                 ],
               ),
             ),
