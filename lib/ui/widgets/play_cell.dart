@@ -15,7 +15,7 @@ class PlayCell extends StatelessWidget {
   final int index;
 
   void _onCellTapped(BuildContext context) {
-    Provider.of<GameProvider>(context, listen: false).onCellTapped(index);
+    Provider.of<GameProvider>(context, listen: false).onCellTapped(context, index);
   }
 
   @override

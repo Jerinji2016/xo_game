@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 
-import '../enum/game_state.dart';
 import '../enum/player.dart';
 import '../modals/game_result.dart';
 
@@ -12,10 +11,6 @@ class GameProvider extends ChangeNotifier {
   int _playerIndex = 0;
 
   Player? getCellValue(int index) => _cellValues[index];
-
-  GameState _gameState = GameState.menu;
-
-  GameState get gameState => _gameState;
 
   GameResult? _gameResult;
 
@@ -29,21 +24,14 @@ class GameProvider extends ChangeNotifier {
     _playerIndex = 0;
   }
 
-  void returnToMenu() {
-    _gameState = GameState.menu;
-    notifyListeners();
-  }
 
-  void onPlayTapped() {
-    reset();
-    _gameState = GameState.inGame;
-    notifyListeners();
-  }
-
-  void onCellTapped(int index) {
+  void onCellTapped(BuildContext context, int index) {
     _cellValues[index] = Player.values.elementAt(_playerIndex);
     final canContinue = _evaluate();
-    if (!canContinue) return;
+    if (!canContinue) {
+      //  to-do: redirect to ResultPage
+      return;
+    }
 
     _playerIndex++;
     _playerIndex %= Player.values.length;
@@ -67,7 +55,6 @@ class GameProvider extends ChangeNotifier {
         winner: player,
         winCondition: winCondition,
       );
-      _gameState = GameState.result;
       notifyListeners();
       return false;
     }
@@ -75,7 +62,6 @@ class GameProvider extends ChangeNotifier {
     if (nonNullValues.length == 9) {
       notifyListeners();
       _gameResult = GameResult.draw();
-      _gameState = GameState.result;
       return false;
     }
 
