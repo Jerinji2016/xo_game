@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import '../transition_widget/fade_in_transition.dart';
+import '../transition_widget/fade_out_transition.dart';
 import '../widgets/logo.dart';
 import '../widgets/play_button.dart';
 import '../widgets/score_board.dart';
@@ -62,8 +64,8 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
               ),
               Expanded(
                 child: Center(
-                  child: _fadeIn(
-                    begin: 0,
+                  child: FadeInTransition(
+                    controller: _entryController,
                     end: 0.7,
                     child: const ScoreBoard(),
                   ),
@@ -73,10 +75,13 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                 child: Center(
                   child: AnimatedBuilder(
                     animation: _exitController,
-                    builder: (context, child) => _fadeOut(child: child!),
-                    child: _fadeIn(
+                    builder: (context, child) => FadeOutTransition(
+                      controller: _exitController,
+                      child: child!,
+                    ),
+                    child: FadeInTransition(
+                      controller: _entryController,
                       begin: 0.3,
-                      end: 1,
                       child: PlayButton(onTap: _onTap),
                     ),
                   ),
@@ -85,60 +90,6 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
             ],
           );
         },
-      ),
-    );
-  }
-
-  Widget _fadeIn({required double begin, required double end, required Widget child}) {
-    final offsetAnimation = Tween<Offset>(
-      begin: const Offset(0, 30),
-      end: Offset.zero,
-    ).animate(
-      CurvedAnimation(
-        parent: _entryController,
-        curve: Interval(begin, end, curve: Curves.ease),
-      ),
-    );
-
-    final opacityAnimation = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(
-        parent: _entryController,
-        curve: Interval(begin, end, curve: Curves.ease),
-      ),
-    );
-
-    return Opacity(
-      opacity: opacityAnimation.value,
-      child: Transform.translate(
-        offset: offsetAnimation.value,
-        child: child,
-      ),
-    );
-  }
-
-  Widget _fadeOut({required Widget child}) {
-    final offsetAnimation = Tween<Offset>(
-      begin: Offset.zero,
-      end: const Offset(0, 30),
-    ).animate(
-      CurvedAnimation(
-        parent: _exitController,
-        curve: Curves.ease,
-      ),
-    );
-
-    final opacityAnimation = Tween<double>(begin: 1, end: 0).animate(
-      CurvedAnimation(
-        parent: _exitController,
-        curve: Curves.ease,
-      ),
-    );
-
-    return Opacity(
-      opacity: opacityAnimation.value,
-      child: Transform.translate(
-        offset: offsetAnimation.value,
-        child: child,
       ),
     );
   }
