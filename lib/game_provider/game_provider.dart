@@ -13,7 +13,7 @@ class GameProvider extends ChangeNotifier {
 
   Player? getCellValue(int index) => _cellValues[index];
 
-  GameState _gameState = GameState.inGame;
+  GameState _gameState = GameState.menu;
 
   GameState get gameState => _gameState;
 
