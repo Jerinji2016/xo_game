@@ -11,9 +11,7 @@ class PlayArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    debugPrint('PlayArea.build: 🐞$size');
     final dimension = min<double>(450, size.shortestSide - 48);
-    debugPrint('PlayArea.build: 🐞dim: $dimension');
 
     return SizedBox.square(
       dimension: dimension,
