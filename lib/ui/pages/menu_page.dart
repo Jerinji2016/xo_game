@@ -14,6 +14,17 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
+  @override
+  void initState() {
+    super.initState();
+
+    _loadInitialAnimation();
+  }
+
+  void _loadInitialAnimation() {
+    final isFirstTime = Provider.of<GameProvider>(context, listen: false).isFirstLoad;
+  }
+
   void _onTap() {
     // to-do: animation
     Provider.of<GameProvider>(context, listen: false).onPlayTapped();
@@ -25,7 +36,10 @@ class _MenuPageState extends State<MenuPage> {
       children: [
         const Expanded(
           child: Center(
-            child: Logo(),
+            child: Hero(
+              tag: 'logo-from-splash',
+              child: Logo(),
+            ),
           ),
         ),
         const Expanded(
