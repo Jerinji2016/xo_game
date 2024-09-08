@@ -23,23 +23,23 @@ class XOGame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: ChangeNotifierProvider(
-        create: (context) => GameProvider(),
-        child: const SplashPage(),
-      ),
-      themeMode: ThemeMode.dark,
-      theme: ThemeData(
-        fontFamily: 'LuckiestGuy',
-        appBarTheme: const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Colors.black,
-            statusBarBrightness: Brightness.dark,
+    return ChangeNotifierProvider(
+      create: (context) => GameProvider(),
+      child: MaterialApp(
+        home: const SplashPage(),
+        themeMode: ThemeMode.dark,
+        theme: ThemeData(
+          fontFamily: 'LuckiestGuy',
+          appBarTheme: const AppBarTheme(
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Colors.black,
+              statusBarBrightness: Brightness.dark,
+            ),
           ),
+          scaffoldBackgroundColor: darkPrimary,
         ),
-        scaffoldBackgroundColor: darkPrimary,
+        debugShowCheckedModeBanner: false,
       ),
-      debugShowCheckedModeBanner: false,
     );
   }
 }
