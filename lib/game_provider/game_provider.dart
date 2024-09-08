@@ -23,6 +23,7 @@ class GameProvider extends ChangeNotifier {
       ..addAll(kDefaultCell);
     _gameResult = null;
     _playerIndex = 0;
+    notifyListeners();
   }
 
   void onCellTapped(BuildContext context, int index) {
