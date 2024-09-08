@@ -21,32 +21,34 @@ class _GamePageState extends State<GamePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Expanded(
-          child: Center(
-            child: Logo(),
+    return Scaffold(
+      body: Column(
+        children: [
+          const Expanded(
+            child: Center(
+              child: Logo(),
+            ),
           ),
-        ),
-        const Expanded(
-          child: Center(
-            child: ScoreBoard(),
+          const Expanded(
+            child: Center(
+              child: ScoreBoard(),
+            ),
           ),
-        ),
-        const Expanded(
-          flex: 3,
-          child: Center(
-            child: PlayArea(),
+          const Expanded(
+            flex: 3,
+            child: Center(
+              child: PlayArea(),
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 24),
-          child: PrimaryButton(
-            text: 'Go Back',
-            onTap: _onBackTapped,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24),
+            child: PrimaryButton(
+              text: 'Go Back',
+              onTap: _onBackTapped,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

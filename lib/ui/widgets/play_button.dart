@@ -31,7 +31,7 @@ class _PlayButtonState extends State<PlayButton> {
           )
         ],
         gradient: LinearGradient(
-          begin: _isHovered ? Alignment.topCenter : Alignment.topLeft,
+          begin: _isHovered ? const Alignment(0.2, -1) : Alignment.topLeft,
           end: _isHovered ? Alignment.bottomCenter : Alignment.bottomRight,
           colors: const [
             darkSecondary,

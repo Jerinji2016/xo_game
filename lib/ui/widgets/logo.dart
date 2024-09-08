@@ -8,34 +8,37 @@ class Logo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: FittedBox(
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: SvgPicture.asset(
-                Assets.logo,
-                height: 48,
-                colorFilter: const ColorFilter.mode(
-                  Color(0xFFF1F1F1),
-                  BlendMode.srcIn,
+    return Hero(
+      tag: 'logo',
+      child: Material(
+        color: Colors.transparent,
+        child: FittedBox(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: SvgPicture.asset(
+                  Assets.logo,
+                  height: 48,
+                  colorFilter: const ColorFilter.mode(
+                    Color(0xFFF1F1F1),
+                    BlendMode.srcIn,
+                  ),
                 ),
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12),
-              child: Text(
-                'XO GAME',
-                style: TextStyle(
-                  fontSize: 48,
-                  color: Color(0xFFF1F1F1),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                child: Text(
+                  'XO GAME',
+                  style: TextStyle(
+                    fontSize: 48,
+                    color: Color(0xFFF1F1F1),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

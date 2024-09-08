@@ -9,24 +9,26 @@ class ResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        Expanded(
-          child: Center(
-            child: Logo(),
+    return const Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+            child: Center(
+              child: Logo(),
+            ),
           ),
-        ),
-        Expanded(
-          child: Center(
-            child: ScoreBoard(),
+          Expanded(
+            child: Center(
+              child: ScoreBoard(),
+            ),
           ),
-        ),
-        Expanded(
-          child: Center(
-            child: GameResult(),
+          Expanded(
+            child: Center(
+              child: GameResult(),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

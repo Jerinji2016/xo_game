@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import 'config/theme_config.dart';
 import 'game_provider/game_provider.dart';
-import 'ui/splash.dart';
+import 'ui/pages/splash_page.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -24,7 +24,10 @@ class XOGame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const SplashScreen(),
+      home: ChangeNotifierProvider(
+        create: (context) => GameProvider(),
+        child: const SplashPage(),
+      ),
       themeMode: ThemeMode.dark,
       theme: ThemeData(
         fontFamily: 'LuckiestGuy',
@@ -37,12 +40,6 @@ class XOGame extends StatelessWidget {
         scaffoldBackgroundColor: darkPrimary,
       ),
       debugShowCheckedModeBanner: false,
-      builder: (context, child) {
-        return ChangeNotifierProvider(
-          create: (context) => GameProvider(),
-          child: child,
-        );
-      },
     );
   }
 }
