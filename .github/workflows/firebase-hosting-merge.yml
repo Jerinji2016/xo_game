@@ -8,6 +8,7 @@ name: Deploy to Firebase Hosting on merge
       - main
 jobs:
   build_and_deploy_web:
+    name: Deploy Web
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -16,7 +17,7 @@ jobs:
       - name: Initialize Flutter SDK
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.3.7'
+          flutter-version: '3.22.1'
           channel: stable
 
       - name: Get Dependencies
