@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'menu_page.dart';
 import '../widgets/logo.dart';
+import 'menu_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -17,8 +17,8 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
 
     SchedulerBinding.instance.addPostFrameCallback(
-          (timestamp) => Future<void>.delayed(const Duration(seconds: 1)).then(
-            (value) => Navigator.of(context).pushReplacement(
+      (timestamp) => Future<void>.delayed(const Duration(seconds: 1)).then(
+        (value) => Navigator.of(context).pushReplacement(
           MaterialPageRoute<void>(
             builder: (context) => const MenuPage(),
           ),

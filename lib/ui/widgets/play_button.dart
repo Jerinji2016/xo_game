@@ -28,7 +28,7 @@ class _PlayButtonState extends State<PlayButton> {
             color: Colors.white10,
             blurRadius: 10,
             offset: _isHovered ? const Offset(-5, 5) : const Offset(5, 5),
-          )
+          ),
         ],
         gradient: LinearGradient(
           begin: _isHovered ? const Alignment(0.2, -1) : Alignment.topLeft,
