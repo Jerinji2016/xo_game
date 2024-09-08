@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'config/theme_config.dart';
-import 'game_provider.dart';
+import 'game_provider/game_provider.dart';
 import 'ui/app.dart';
 
 void main() {
