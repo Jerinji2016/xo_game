@@ -15,10 +15,14 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
-  late final _animationController = AnimationController(
+  late final _entryController = AnimationController(
     vsync: this,
     duration: const Duration(seconds: 1),
-    reverseDuration: const Duration(milliseconds: 300),
+  );
+
+  late final _exitController = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 400),
   );
 
   @override
@@ -26,14 +30,14 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
     super.initState();
 
     SchedulerBinding.instance.addPostFrameCallback(
-      (timestamp) => _animationController.forward(),
+      (timestamp) => _entryController.forward(),
     );
   }
 
   void _onTap() {
-    if(_animationController.isAnimating) return;
+    if (_exitController.isAnimating) return;
 
-    _animationController.reverse().then(
+    _exitController.reverse().then(
           (value) => Navigator.pushReplacement(
             context,
             CupertinoPageRoute<void>(
@@ -47,7 +51,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnimatedBuilder(
-        animation: _animationController,
+        animation: _entryController,
         builder: (context, child) {
           return Column(
             children: [
@@ -67,10 +71,14 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
               ),
               Expanded(
                 child: Center(
-                  child: _fadeIn(
-                    begin: 0.3,
-                    end: 1,
-                    child: PlayButton(onTap: _onTap),
+                  child: AnimatedBuilder(
+                    animation: _exitController,
+                    builder: (context, child) => _fadeOut(child: child!),
+                    child: _fadeIn(
+                      begin: 0.3,
+                      end: 1,
+                      child: PlayButton(onTap: _onTap),
+                    ),
                   ),
                 ),
               ),
@@ -87,14 +95,14 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
       end: Offset.zero,
     ).animate(
       CurvedAnimation(
-        parent: _animationController,
+        parent: _entryController,
         curve: Interval(begin, end, curve: Curves.ease),
       ),
     );
 
     final opacityAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
-        parent: _animationController,
+        parent: _entryController,
         curve: Interval(begin, end, curve: Curves.ease),
       ),
     );
@@ -108,9 +116,37 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
     );
   }
 
-// @override
-// void dispose() {
-//   super.dispose();
-//   _animationController.dispose();
-// }
+  Widget _fadeOut({required Widget child}) {
+    final offsetAnimation = Tween<Offset>(
+      begin: Offset.zero,
+      end: const Offset(0, 30),
+    ).animate(
+      CurvedAnimation(
+        parent: _exitController,
+        curve: Curves.ease,
+      ),
+    );
+
+    final opacityAnimation = Tween<double>(begin: 1, end: 0).animate(
+      CurvedAnimation(
+        parent: _exitController,
+        curve: Curves.ease,
+      ),
+    );
+
+    return Opacity(
+      opacity: opacityAnimation.value,
+      child: Transform.translate(
+        offset: offsetAnimation.value,
+        child: child,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _entryController.dispose();
+    _exitController.dispose();
+  }
 }

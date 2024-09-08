@@ -14,7 +14,13 @@ class GamePage extends StatefulWidget {
   State<GamePage> createState() => _GamePageState();
 }
 
-class _GamePageState extends State<GamePage> {
+class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
+  late final _animationController = AnimationController(
+    vsync: this,
+    duration: const Duration(seconds: 1),
+    reverseDuration: const Duration(milliseconds: 300),
+  );
+
   @override
   void initState() {
     super.initState();

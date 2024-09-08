@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -19,7 +20,7 @@ class _SplashPageState extends State<SplashPage> {
     SchedulerBinding.instance.addPostFrameCallback(
       (timestamp) => Future<void>.delayed(const Duration(seconds: 1)).then(
         (value) => Navigator.of(context).pushReplacement(
-          MaterialPageRoute<void>(
+          CupertinoPageRoute<void>(
             builder: (context) => const MenuPage(),
           ),
         ),
