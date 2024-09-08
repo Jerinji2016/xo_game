@@ -11,45 +11,50 @@ class PlayArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final dimension = min<double>(450, size.shortestSide);
+    debugPrint('PlayArea.build: 🐞$size');
+    final dimension = min<double>(450, size.shortestSide - 48);
+    debugPrint('PlayArea.build: 🐞dim: $dimension');
 
     return SizedBox.square(
       dimension: dimension,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(24),
-        child: Container(
-          color: darkSecondary,
-          padding: const EdgeInsets.all(8),
-          child: const Column(
-            children: [
-              Expanded(
-                child: Row(
-                  children: [
-                    Expanded(child: PlayCell(index: 0)),
-                    Expanded(child: PlayCell(index: 1)),
-                    Expanded(child: PlayCell(index: 2)),
-                  ],
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(24),
+          child: Container(
+            color: darkSecondary,
+            padding: const EdgeInsets.all(8),
+            child: const Column(
+              children: [
+                Expanded(
+                  child: Row(
+                    children: [
+                      Expanded(child: PlayCell(index: 0)),
+                      Expanded(child: PlayCell(index: 1)),
+                      Expanded(child: PlayCell(index: 2)),
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Row(
-                  children: [
-                    Expanded(child: PlayCell(index: 3)),
-                    Expanded(child: PlayCell(index: 4)),
-                    Expanded(child: PlayCell(index: 5)),
-                  ],
+                Expanded(
+                  child: Row(
+                    children: [
+                      Expanded(child: PlayCell(index: 3)),
+                      Expanded(child: PlayCell(index: 4)),
+                      Expanded(child: PlayCell(index: 5)),
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Row(
-                  children: [
-                    Expanded(child: PlayCell(index: 6)),
-                    Expanded(child: PlayCell(index: 7)),
-                    Expanded(child: PlayCell(index: 8)),
-                  ],
+                Expanded(
+                  child: Row(
+                    children: [
+                      Expanded(child: PlayCell(index: 6)),
+                      Expanded(child: PlayCell(index: 7)),
+                      Expanded(child: PlayCell(index: 8)),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

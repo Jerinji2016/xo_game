@@ -15,8 +15,7 @@ class PlayCell extends StatelessWidget {
   final int index;
 
   void _onCellTapped(BuildContext context) {
-    final gameProvider = Provider.of<GameProvider>(context, listen: false);
-    gameProvider.onCellTapped(index);
+    Provider.of<GameProvider>(context, listen: false).onCellTapped(index);
   }
 
   @override
@@ -26,7 +25,7 @@ class PlayCell extends StatelessWidget {
 
     final padding = min<double>(
       12,
-      MediaQuery.of(context).size.shortestSide * .015,
+      MediaQuery.of(context).size.shortestSide * .02,
     );
 
     return Container(

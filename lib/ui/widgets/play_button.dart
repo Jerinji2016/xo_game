@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../config/theme_config.dart';
-import '../../game_provider/game_provider.dart';
 
 class PlayButton extends StatefulWidget {
-  const PlayButton({super.key});
+  const PlayButton({
+    required this.onTap,
+    super.key,
+  });
+
+  final VoidCallback onTap;
 
   @override
   State<PlayButton> createState() => _PlayButtonState();
@@ -40,7 +43,7 @@ class _PlayButtonState extends State<PlayButton> {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: Provider.of<GameProvider>(context, listen: false).onPlayTapped,
+          onTap: widget.onTap,
           onHover: (hover) => setState(() => _isHovered = hover),
           borderRadius: BorderRadius.circular(16),
           child: const Padding(
