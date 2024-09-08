@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../enum/player.dart';
 import '../modals/game_result.dart';
+import '../ui/pages/result_page.dart';
 
 part 'constants.dart';
 
@@ -24,12 +25,15 @@ class GameProvider extends ChangeNotifier {
     _playerIndex = 0;
   }
 
-
   void onCellTapped(BuildContext context, int index) {
     _cellValues[index] = Player.values.elementAt(_playerIndex);
     final canContinue = _evaluate();
     if (!canContinue) {
-      //  to-do: redirect to ResultPage
+      Navigator.of(context).push(
+        CupertinoPageRoute<void>(
+          builder: (context) => const ResultPage(),
+        ),
+      );
       return;
     }
 
