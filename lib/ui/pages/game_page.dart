@@ -76,12 +76,10 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin, Fade
                 padding: const EdgeInsets.symmetric(vertical: 24),
                 child: AnimatedBuilder(
                   animation: _exitController,
-                  builder: (context, child) {
-                    return fadeOut(
-                      controller: _exitController,
-                      child: child!,
-                    );
-                  },
+                  builder: (context, child) => fadeOut(
+                    controller: _exitController,
+                    child: child!,
+                  ),
                   child: fadeIn(
                     controller: _entryController,
                     begin: 0.3,
