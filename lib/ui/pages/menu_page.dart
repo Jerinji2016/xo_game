@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import '../transition_widget/fade_in_transition.dart';
-import '../transition_widget/fade_out_transition.dart';
+import '../transition_mixin/fade_transition.mixin.dart';
 import '../widgets/logo.dart';
 import '../widgets/play_button.dart';
 import '../widgets/score_board.dart';
@@ -16,7 +15,7 @@ class MenuPage extends StatefulWidget {
   State<MenuPage> createState() => _MenuPageState();
 }
 
-class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
+class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin, FadeTransitionMixin {
   late final _entryController = AnimationController(
     vsync: this,
     duration: const Duration(seconds: 1),
@@ -40,7 +39,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
     if (_exitController.isAnimating) return;
 
     _exitController.reverse().then(
-          (value) => Navigator.pushReplacement(
+          (value) => Navigator.push(
             context,
             CupertinoPageRoute<void>(
               builder: (context) => const GamePage(),
@@ -64,7 +63,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
               ),
               Expanded(
                 child: Center(
-                  child: FadeInTransition(
+                  child: fadeIn(
                     controller: _entryController,
                     end: 0.7,
                     child: const ScoreBoard(),
@@ -75,11 +74,11 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
                 child: Center(
                   child: AnimatedBuilder(
                     animation: _exitController,
-                    builder: (context, child) => FadeOutTransition(
+                    builder: (context, child) => fadeOut(
                       controller: _exitController,
                       child: child!,
                     ),
-                    child: FadeInTransition(
+                    child: fadeIn(
                       controller: _entryController,
                       begin: 0.3,
                       child: PlayButton(onTap: _onTap),
