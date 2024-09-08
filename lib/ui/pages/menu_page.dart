@@ -1,11 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:provider/provider.dart';
 
-import '../../game_provider/game_provider.dart';
 import '../widgets/logo.dart';
 import '../widgets/play_button.dart';
 import '../widgets/score_board.dart';
+import 'game_page.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -18,6 +18,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
   late final _animationController = AnimationController(
     vsync: this,
     duration: const Duration(seconds: 1),
+    reverseDuration: const Duration(milliseconds: 300),
   );
 
   @override
@@ -30,7 +31,16 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
   }
 
   void _onTap() {
-    Provider.of<GameProvider>(context, listen: false).onPlayTapped();
+    if(_animationController.isAnimating) return;
+
+    _animationController.reverse().then(
+          (value) => Navigator.pushReplacement(
+            context,
+            CupertinoPageRoute<void>(
+              builder: (context) => const GamePage(),
+            ),
+          ),
+        );
   }
 
   @override
@@ -98,9 +108,9 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
     );
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    _animationController.dispose();
-  }
+// @override
+// void dispose() {
+//   super.dispose();
+//   _animationController.dispose();
+// }
 }

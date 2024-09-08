@@ -21,7 +21,7 @@ class GameProvider extends ChangeNotifier {
 
   GameResult? get gameResult => _gameResult;
 
-  void _reset() {
+  void reset() {
     _cellValues
       ..clear()
       ..addAll(kDefaultCell);
@@ -35,7 +35,7 @@ class GameProvider extends ChangeNotifier {
   }
 
   void onPlayTapped() {
-    _reset();
+    reset();
     _gameState = GameState.inGame;
     notifyListeners();
   }

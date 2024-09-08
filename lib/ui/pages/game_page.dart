@@ -15,6 +15,12 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<GameProvider>(context, listen: false).reset();
+  }
+
   void _onBackTapped() {
     Provider.of<GameProvider>(context, listen: false).returnToMenu();
   }
