@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,10 +24,15 @@ class PlayCell extends StatelessWidget {
     final gameProvider = Provider.of<GameProvider>(context);
     final cellValue = gameProvider.getCellValue(index);
 
+    final padding = min<double>(
+      12,
+      MediaQuery.of(context).size.shortestSide * .015,
+    );
+
     return Container(
       height: double.infinity,
       color: darkSecondary,
-      padding: const EdgeInsets.all(12),
+      padding: EdgeInsets.all(padding),
       child: Material(
         color: darkPrimary,
         shape: RoundedRectangleBorder(

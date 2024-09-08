@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 import '../config/asset_config.dart';
+import '../enum/game_state.dart';
+import '../game_provider/game_provider.dart';
+import 'widgets/game_result.dart';
 import 'widgets/play_area.dart';
+import 'widgets/play_button.dart';
+import 'widgets/primary_button.dart';
 import 'widgets/score_board.dart';
 
 class App extends StatelessWidget {
@@ -27,12 +33,7 @@ class App extends StatelessWidget {
                   child: ScoreBoard(),
                 ),
               ),
-              const Expanded(
-                flex: 5,
-                child: Center(
-                  child: PlayArea(),
-                ),
-              ),
+              const GameBody(),
             ],
           ),
         ),
@@ -66,6 +67,50 @@ class App extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class GameBody extends StatelessWidget {
+  const GameBody({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final gameProvider = Provider.of<GameProvider>(context);
+    int flex;
+    Widget child;
+    switch (gameProvider.gameState) {
+      case GameState.menu:
+        flex = 2;
+        child = const PlayButton();
+
+      case GameState.inGame:
+        flex = 5;
+        child = Column(
+          children: [
+            const Expanded(
+              child: PlayArea(),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 24),
+              child: PrimaryButton(
+                text: 'Go Back',
+                onTap: Provider.of<GameProvider>(context).returnToMenu,
+              ),
+            ),
+          ],
+        );
+
+      case GameState.result:
+        flex = 3;
+        child = const GameResult();
+    }
+
+    return Expanded(
+      flex: flex,
+      child: Center(
+        child: child,
+      ),
     );
   }
 }

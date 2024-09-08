@@ -21,6 +21,25 @@ class GameProvider extends ChangeNotifier {
 
   GameResult? get gameResult => _gameResult;
 
+  void _reset() {
+    _cellValues
+      ..clear()
+      ..addAll(kDefaultCell);
+    _gameResult = null;
+    _playerIndex = 0;
+  }
+
+  void returnToMenu() {
+    _gameState = GameState.menu;
+    notifyListeners();
+  }
+
+  void onPlayTapped() {
+    _reset();
+    _gameState = GameState.inGame;
+    notifyListeners();
+  }
+
   void onCellTapped(int index) {
     _cellValues[index] = Player.values.elementAt(_playerIndex);
     final canContinue = _evaluate();
@@ -50,13 +69,10 @@ class GameProvider extends ChangeNotifier {
       );
       _gameState = GameState.result;
       notifyListeners();
-      debugPrint('GameProvider._evaluate: ✅Win Condition Satisfied'
-          '\n$winCondition');
       return false;
     }
 
     if (nonNullValues.length == 9) {
-      debugPrint('GameProvider._evaluate: ✅Game ended in draw');
       notifyListeners();
       _gameResult = GameResult.draw();
       _gameState = GameState.result;
