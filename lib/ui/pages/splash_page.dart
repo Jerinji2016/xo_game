@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -18,11 +20,18 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
 
     SchedulerBinding.instance.addPostFrameCallback(
-      (timestamp) => Future<void>.delayed(const Duration(seconds: 1)).then(
-        (value) => Navigator.of(context).pushReplacement(
-          CupertinoPageRoute<void>(
-            builder: (context) => const MenuPage(),
-          ),
+      (_) => _navigateToMenuAfterDelay(),
+    );
+  }
+
+  Future<void> _navigateToMenuAfterDelay() async {
+    await Future<void>.delayed(const Duration(seconds: 1));
+    if (!mounted) return;
+
+    unawaited(
+      Navigator.of(context).pushReplacement(
+        CupertinoPageRoute<void>(
+          builder: (context) => const MenuPage(),
         ),
       ),
     );
@@ -31,6 +40,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      backgroundColor: Colors.transparent,
       body: Center(
         child: Logo(),
       ),

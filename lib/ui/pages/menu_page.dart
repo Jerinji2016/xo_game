@@ -51,6 +51,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin, Fade
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: AnimatedBuilder(
         animation: _entryController,
         builder: (context, child) {
