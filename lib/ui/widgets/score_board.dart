@@ -23,9 +23,13 @@ class _ScoreBoardState extends State<ScoreBoard> {
           color: Colors.white10,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
+            side: const BorderSide(
+              color: Colors.white24,
+              width: 3,
+            )
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
