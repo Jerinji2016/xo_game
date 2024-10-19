@@ -15,33 +15,30 @@ class _ScoreBoardState extends State<ScoreBoard> {
   Widget build(BuildContext context) {
     final gameProvider = Provider.of<GameProvider>(context);
 
-    return Material(
-      color: Colors.transparent,
-      child: Hero(
-        tag: 'score-board',
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxHeight: 400),
-          child: Material(
-            color: Colors.white10,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(24),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildPlayerScore(
-                    'Player X:',
-                    gameProvider.cache.xWins.toString(),
-                  ),
-                  _buildPlayerScore(
-                    'Player O:',
-                    gameProvider.cache.oWins.toString(),
-                  ),
-                ],
-              ),
+    return Hero(
+      tag: 'score-board',
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxHeight: 400),
+        child: Material(
+          color: Colors.white10,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildPlayerScore(
+                  'Player X:',
+                  gameProvider.cache.xWins.toString(),
+                ),
+                _buildPlayerScore(
+                  'Player O:',
+                  gameProvider.cache.oWins.toString(),
+                ),
+              ],
             ),
           ),
         ),
