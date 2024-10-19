@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:glassmorphism/glassmorphism.dart';
 import 'package:provider/provider.dart';
 
 import '../../game_provider/game_provider.dart';
@@ -20,16 +21,25 @@ class _ScoreBoardState extends State<ScoreBoard> {
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxHeight: 400),
         child: Material(
-          color: Colors.white10,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
-            side: const BorderSide(
-              color: Colors.white24,
-              width: 3,
-            )
-          ),
-          child: Padding(
+          color: Colors.transparent,
+          child: GlassmorphicContainer(
+            height: 100,
+            width: 200,
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+            borderRadius: 24,
+            linearGradient: const LinearGradient(
+              colors: [Colors.white10, Colors.white12],
+            ),
+            alignment: Alignment.center,
+            border: 2,
+            blur: 3,
+            borderGradient: LinearGradient(
+              colors: [
+                Colors.green.withOpacity(0.6),
+                Colors.blue.withOpacity(0.6),
+                Colors.purple.withOpacity(0.6),
+              ],
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
