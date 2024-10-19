@@ -54,7 +54,7 @@ class XOGame extends StatelessWidget {
                   statusBarBrightness: Brightness.dark,
                 ),
               ),
-              scaffoldBackgroundColor: darkPrimary,
+              scaffoldBackgroundColor: Colors.transparent,
             ),
             home: const SplashPage(),
             debugShowCheckedModeBanner: false,
