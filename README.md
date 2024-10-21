@@ -2,6 +2,8 @@
 
 A Flutter app to play Tic Tac Toe with Neomorphic UI
 
+Checkout the deployed app [here](https://tic-tac-toe-d159d.web.app/)
+
 ## Getting Started
 
 1. Clone the repository  
@@ -27,4 +29,3 @@ A Flutter app to play Tic Tac Toe with Neomorphic UI
 ***
 
 ![home](screenshots/result.png)
-
