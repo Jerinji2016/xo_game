@@ -40,17 +40,13 @@ class PrimaryButton extends StatelessWidget {
           Colors.purple.withOpacity(0.6),
         ],
       ),
-      // decoration: BoxDecoration(
-      //   borderRadius: BorderRadius.circular(8),
-      // ),
       border: 1,
       child: Material(
         color: Colors.transparent,
-        // shape: RoundedRectangleBorder(
-        //   borderRadius: BorderRadius.circular(8),
-        // ),
         child: InkWell(
           onTap: onTap,
+          splashColor: Colors.white10,
+          highlightColor: Colors.white.withOpacity(0.05),
           borderRadius: BorderRadius.circular(8),
           child: Padding(
             padding: padding,
