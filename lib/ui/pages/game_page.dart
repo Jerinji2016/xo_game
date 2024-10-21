@@ -24,7 +24,7 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin, Fade
 
   late final _exitController = AnimationController(
     vsync: this,
-    duration: const Duration(seconds: 1),
+    duration: const Duration(milliseconds: 100),
   );
 
   @override
@@ -41,7 +41,7 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin, Fade
   void _onBackTapped() {
     if (_exitController.isAnimating) return;
 
-    _exitController.reverse().then(
+    _exitController.forward().then(
           (value) => Navigator.of(context).pop(),
         );
   }
