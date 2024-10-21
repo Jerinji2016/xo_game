@@ -32,14 +32,23 @@ class GameResult extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 24),
-        PrimaryButton(
-          text: 'Play Again',
-          onTap: onPlayAgainTapped,
-        ),
-        const SizedBox(height: 24),
-        PrimaryButton(
-          text: 'Go To Menu',
-          onTap: onGoToMenuTapped,
+        Wrap(
+          runSpacing: 24,
+          spacing: 24,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          alignment: WrapAlignment.center,
+          children: [
+            PrimaryButton(
+              text: 'Play Again',
+              width: 130,
+              onTap: onPlayAgainTapped,
+            ),
+            PrimaryButton(
+              text: 'Go To Menu',
+              width: 140,
+              onTap: onGoToMenuTapped,
+            ),
+          ],
         ),
       ],
     );
