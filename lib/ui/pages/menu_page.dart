@@ -23,13 +23,14 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin, Fade
 
   late final _exitController = AnimationController(
     vsync: this,
-    duration: const Duration(milliseconds: 400),
+    duration: const Duration(milliseconds: 200),
   );
 
   @override
   void initState() {
     super.initState();
 
+    _exitController.reset();
     SchedulerBinding.instance.addPostFrameCallback(
       (timestamp) => _entryController.forward(),
     );
@@ -38,13 +39,16 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin, Fade
   void _onTap() {
     if (_exitController.isAnimating) return;
 
-    _exitController.reverse().then(
-          (value) => Navigator.push(
-            context,
-            CupertinoPageRoute<void>(
-              builder: (context) => const GamePage(),
-            ),
-          ),
+    _exitController.forward().then(
+          (value) async {
+            await Navigator.push(
+              context,
+              CupertinoPageRoute<void>(
+                builder: (context) => const GamePage(),
+              ),
+            );
+            _exitController.reset();
+          },
         );
   }
 
@@ -81,7 +85,14 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin, Fade
                     child: fadeIn(
                       controller: _entryController,
                       begin: 0.3,
-                      child: PlayButton(onTap: _onTap),
+                      child: AnimatedBuilder(
+                        animation: _exitController,
+                        builder: (context, child) => fadeOut(
+                          controller: _exitController,
+                          child: child!,
+                        ),
+                        child: PlayButton(onTap: _onTap),
+                      ),
                     ),
                   ),
                 ),

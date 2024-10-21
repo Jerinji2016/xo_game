@@ -6,6 +6,7 @@ import 'config/shared_pref_config.dart';
 import 'config/theme_config.dart';
 import 'game_provider/game_provider.dart';
 import 'ui/pages/splash_page.dart';
+import 'ui/widgets/sync_bg_animation/synced_bg_animation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +31,6 @@ class XOGame extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => GameProvider(),
       child: MaterialApp(
-        home: const SplashPage(),
         themeMode: ThemeMode.dark,
         theme: ThemeData(
           fontFamily: 'LuckiestGuy',
@@ -43,6 +43,23 @@ class XOGame extends StatelessWidget {
           scaffoldBackgroundColor: darkPrimary,
         ),
         debugShowCheckedModeBanner: false,
+        home: SyncedBackgroundAnimation(
+          child: MaterialApp(
+            themeMode: ThemeMode.dark,
+            theme: ThemeData(
+              fontFamily: 'LuckiestGuy',
+              appBarTheme: const AppBarTheme(
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: Colors.black,
+                  statusBarBrightness: Brightness.dark,
+                ),
+              ),
+              scaffoldBackgroundColor: Colors.transparent,
+            ),
+            home: const SplashPage(),
+            debugShowCheckedModeBanner: false,
+          ),
+        ),
       ),
     );
   }

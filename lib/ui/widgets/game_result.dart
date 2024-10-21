@@ -16,7 +16,7 @@ class GameResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gameProvider = Provider.of<GameProvider>(context);
+    final gameProvider = Provider.of<GameProvider>(context, listen: false);
     final gameResult = gameProvider.gameResult!;
 
     final winner = gameResult.winner;
@@ -32,14 +32,23 @@ class GameResult extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 24),
-        PrimaryButton(
-          text: 'Play Again',
-          onTap: onPlayAgainTapped,
-        ),
-        const SizedBox(height: 24),
-        PrimaryButton(
-          text: 'Go To Menu',
-          onTap: onGoToMenuTapped,
+        Wrap(
+          runSpacing: 24,
+          spacing: 24,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          alignment: WrapAlignment.center,
+          children: [
+            PrimaryButton(
+              text: 'Play Again',
+              width: 130,
+              onTap: onPlayAgainTapped,
+            ),
+            PrimaryButton(
+              text: 'Go To Menu',
+              width: 140,
+              onTap: onGoToMenuTapped,
+            ),
+          ],
         ),
       ],
     );
