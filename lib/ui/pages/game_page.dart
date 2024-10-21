@@ -47,7 +47,9 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin, Fade
       (value) async {
         onAnimationComplete();
         await Future<void>.delayed(const Duration(milliseconds: 800));
-        _exitController.reset();
+        if (mounted) {
+          _exitController.reset();
+        }
       },
     );
   }
