@@ -88,7 +88,10 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin, Fade
                         controller: _exitController,
                         child: child!,
                       ),
-                      child: const PlayArea(),
+                      child: const Padding(
+                        padding: EdgeInsets.all(24),
+                        child: PlayArea(),
+                      ),
                     ),
                   ),
                 ),

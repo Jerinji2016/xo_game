@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../config/theme_config.dart';
 import '../../game_provider/game_provider.dart';
 
 class PlayCell extends StatelessWidget {
@@ -30,10 +29,9 @@ class PlayCell extends StatelessWidget {
 
     return Container(
       height: double.infinity,
-      color: darkSecondary,
       padding: EdgeInsets.all(padding),
       child: Material(
-        color: darkPrimary,
+        color: Colors.white.withOpacity(0.1),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
