@@ -6,6 +6,7 @@ import '../config/shared_pref_config.dart';
 import '../enum/player.dart';
 import '../modals/game_cache.dart';
 import '../modals/game_result.dart';
+import '../ui/pages/game_page.dart';
 import '../ui/pages/result_page.dart';
 
 part 'constants.dart';
@@ -59,11 +60,19 @@ class GameProvider extends ChangeNotifier {
       final player = Player.values[_playerIndex];
       _saveWinnerResult(player);
 
-      Navigator.of(context).push(
-        CupertinoPageRoute<void>(
-          builder: (context) => const ResultPage(),
-        ),
-      );
+      final state = context.findAncestorStateOfType<GamePageState>();
+
+      void onComplete() => Navigator.of(context).push(
+            CupertinoPageRoute<void>(
+              builder: (context) => const ResultPage(),
+            ),
+          );
+
+      if (state != null) {
+        state.exitAnimation(onComplete);
+      } else {
+        onComplete();
+      }
       return;
     }
 
