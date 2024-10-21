@@ -9,6 +9,8 @@ import '../widgets/play_area.dart';
 import '../widgets/primary_button.dart';
 import '../widgets/score_board.dart';
 
+typedef GamePageState = _GamePageState;
+
 class GamePage extends StatefulWidget {
   const GamePage({super.key});
 
@@ -24,7 +26,7 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin, Fade
 
   late final _exitController = AnimationController(
     vsync: this,
-    duration: const Duration(seconds: 1),
+    duration: const Duration(milliseconds: 200),
   );
 
   @override
@@ -38,13 +40,23 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin, Fade
     );
   }
 
-  void _onBackTapped() {
+  void exitAnimation(VoidCallback onAnimationComplete) {
     if (_exitController.isAnimating) return;
 
-    _exitController.reverse().then(
-          (value) => Navigator.of(context).pop(),
-        );
+    _exitController.forward().then(
+      (value) async {
+        onAnimationComplete();
+        await Future<void>.delayed(const Duration(milliseconds: 800));
+        if (mounted) {
+          _exitController.reset();
+        }
+      },
+    );
   }
+
+  void _onBackTapped() => exitAnimation(
+        Navigator.of(context).pop,
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +82,17 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin, Fade
                   child: fadeIn(
                     controller: _entryController,
                     end: 0.7,
-                    child: const PlayArea(),
+                    child: AnimatedBuilder(
+                      animation: _exitController,
+                      builder: (context, child) => fadeOut(
+                        controller: _exitController,
+                        child: child!,
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(24),
+                        child: PlayArea(),
+                      ),
+                    ),
                   ),
                 ),
               ),

@@ -1,18 +1,21 @@
 name: xo_game
-description: A Flutter app to play Tic Tac Toe with Neomorphic UI
+description: A Flutter app to play Tic Tac Toe with Glassmorphic UI
 
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.1+1
 
 environment:
   sdk: ^3.0.0
 
 dependencies:
-  firebase_core: ^2.24.2
   flutter:
     sdk: flutter
+
+  firebase_core: ^3.6.0
   flutter_svg: ^2.0.10+1
+  glassmorphism: ^3.0.0
+  lottie: ^3.1.3
   provider: ^6.0.5
   shared_preferences: ^2.3.2
 
@@ -27,6 +30,7 @@ flutter:
 
   assets:
     - assets/logo/xo_logo.svg
+    - assets/animations/bg-anim.json
 
   fonts:
     - family: LuckiestGuy
