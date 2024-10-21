@@ -45,13 +45,16 @@ class PlayCell extends StatelessWidget {
               switchInCurve: Curves.bounceInOut,
               child: cellValue == null
                   ? const SizedBox.shrink()
-                  : Text(
-                      cellValue.value,
-                      style: TextStyle(
-                        fontSize: 56,
-                        color: cellValue.color,
+                  : FittedBox(
+                    child: Text(
+                        cellValue.value,
+                        style: TextStyle(
+                          fontSize: 56,
+                          height: 1.8,
+                          color: cellValue.color,
+                        ),
                       ),
-                    ),
+                  ),
             ),
           ),
         ),
