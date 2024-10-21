@@ -3,7 +3,7 @@ description: A Flutter app to play Tic Tac Toe with Glassmorphic UI
 
 publish_to: 'none'
 
-version: 1.0.1+1
+version: 1.0.2+2
 
 environment:
   sdk: ^3.0.0

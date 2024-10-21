@@ -29,3 +29,9 @@ Checkout the deployed app [here](https://tic-tac-toe-d159d.web.app/)
 ***
 
 ![home](screenshots/result.png)
+
+### Upcoming Features
+
+1. Play against computer
+2. Play against other players
+3. Advanced mode where first move clears after every 5th or 6th move.
