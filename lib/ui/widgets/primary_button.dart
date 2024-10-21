@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 
-import '../../config/theme_config.dart';
-
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
     required this.text,

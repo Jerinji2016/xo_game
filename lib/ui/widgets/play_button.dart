@@ -19,7 +19,7 @@ class _PlayButtonState extends State<PlayButton> with TickerProviderStateMixin {
   late final _animationController = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 300),
-    reverseDuration: const Duration(milliseconds: 100)
+    reverseDuration: const Duration(milliseconds: 100),
   );
 
   void _onHover(bool isHovered) => isHovered ? _animationController.forward() : _animationController.reverse();
