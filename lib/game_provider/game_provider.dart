@@ -57,8 +57,10 @@ class GameProvider extends ChangeNotifier {
     _cellValues[index] = Player.values.elementAt(_playerIndex);
     final canContinue = _evaluate();
     if (!canContinue) {
-      final player = Player.values[_playerIndex];
-      _saveWinnerResult(player);
+      if (_gameResult?.winner != null) {
+        final player = Player.values[_playerIndex];
+        _saveWinnerResult(player);
+      }
 
       final state = context.findAncestorStateOfType<GamePageState>();
 
