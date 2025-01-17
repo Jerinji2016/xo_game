@@ -1,5 +1,9 @@
 # Change Logs
 
+## v1.0.2
+
+- Fix: Draw adds point to Player X
+
 ## v1.0.1
 
 - Changed components to Glassmorphic
